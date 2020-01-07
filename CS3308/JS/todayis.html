@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="button" id="btnClick" value="Click me">
+        <p id="todayis"></p>
+    </body>
+
+    <script type="text/javascript" src="date.js"></script>
+
+    <script type="text/javascript">
+        
+        document.getElementById("btnClick").addEventListener("click", btnClicked);
+        
+        function btnClicked() {
+            var today = todayis();
+            document.getElementById("todayis").innerHTML = today;
+        }
+        
+    </script>
+
+</html>

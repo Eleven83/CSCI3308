@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <button onclick="document.getElementById('animal').src='chicken.png'">Chicken</button>
+        <img id="animal" src="chicken.png" style="width:50%">
+        <button onclick="document.getElementById('animal').src='dog.png'">Dog</button>
+
+
+
+        <input type="button" id="btnClick" value="Click Me">
+    </body>
+
+    <!-- Why did we place the script at the bottom of our file? -->
+
+    <script type="text/javascript">
+        
+        document.getElementById("btnClick").addEventListener("click", btnClicked);
+        
+        function btnClicked() {
+            alert("Hey you clicked me!");
+        }
+        
+    </script>
+
+</html>

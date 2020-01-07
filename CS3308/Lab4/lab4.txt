@@ -1,0 +1,26 @@
+Ryan Hoffman
+CSCI 3308
+
+1.football_db-# CREATE TABLE Universities (UniversityName text, DateEstablished date, Address address, StudentPopulation int, AcceptanceRate decimal);
+
+2.football_db-# INSERT INTO Universities (UniversityName, DateEstablished, Address, StudentPopulation, AcceptanceRate) VALUES (CU Boulder, 1876, 1100 28th St, Boulder, CO 80303, 35000, 80);
+
+3. football_db=# SELECT name, major FROM football_players ORDER BY major;
+
+4. football_db=# SELECT name, rushing_yards FROM football_players WHERE rushing_yards >=70;
+
+5. football_db=# SELECT * FROM football_games WHERE visitor_name='Nebraska';
+
+6. football_db=# SELECT * FROM football_games WHERE home_score > visitor_score;
+
+7. football_db=# SELECT visitor_name, game_date FROM football_games WHERE game_date BETWEEN '20180801' AND '20190201';
+
+8. football_db=# CREATE VIEW wins AS SELECT COUNT(*) FROM football_games WHERE home_score > visitor_score;
+football_db=# SELECT * FROM wins;
+
+9. football_db=# CREATE VIEW totalGames AS SELECT COUNT(*) FROM football_games;
+football_db=# SELECT * FROM totalGames;
+
+10. SELECT COUNT(*) FROM football_games WHERE '1'=ANY(players);
+
+11. SELECT (SELECT DISTINCT rushing_yards FROM football_players WHERE name='Cedric Vega') COUNT(*) FROM football_games WHERE '1'=ANY(players);

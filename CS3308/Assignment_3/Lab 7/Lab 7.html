@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" class="gr__cscita3308_gitlab_io"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Lab 7</title>
+    <!-- Bootstrap core CSS & JS -->
+	<link rel="stylesheet" type="text/css" href="./Lab 7_files/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="./Lab 7_files/prism.css">
+	
+	<script src="./Lab 7_files/jquery-3.3.1.js"></script>
+	<script src="./Lab 7_files/popper.js"></script>
+	<script src="./Lab 7_files/bootstrap.js"></script>
+	<script src="./Lab 7_files/clipboard.js"></script>
+	<script src="./Lab 7_files/prism.js"></script><script src="./Lab 7_files/clipboard.min.js"></script>
+	<!-- Custom CSS -->
+	<link rel="stylesheet" type="text/css" href="./Lab 7_files/labLayout.css">
+	<script src="./Lab 7_files/labScripts.js"></script>
+	</head>
+    <body onload="loadPage()" data-gr-c-s-loaded="true" cz-shortcut-listen="true">
+		<main role="main" class="container">
+			<div class="container-fluid">
+			  <div class="row">
+				<div class="col-10">
+					<h1 class="display-4">Lab 7 Web Services</h1>
+					<p class="lead">This lab will cover the basics of working with a Web API with Javascript, using the DarkSky Weather API</p>
+				</div>
+				<div class="col-2">
+				</div>
+			  </div>
+			</div>
+			            
+			<div class="card card-body" id="step2">
+				<div class="stepLine">
+					<p class="alignleft h5">Lab Overview</p> 
+					<button class="btn btn-primary btn-sm alignbtn" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="true" aria-controls="multiCollapseExample2">Expand</button>
+				</div>
+				<div class="collapse show" id="multiCollapseExample2" style="">
+					<br>
+					<p>For today's lab, you will be completing the javascript for a web page that displays the weather. The weather page will access the DarkSky API and display today's weather and a 6 day forecast.  All of the necessary html code has been provided for you.  All you have to do is complete the javascript at the bottom of "weather.html" file.  You can see an example screenshot of the finished web page below.</p>
+					<br>
+					<hr>
+					<img src="./Lab 7_files/weather_webpage.png" alt="An Example of a completed Weather Page" class="img-fluid">
+					
+					
+				</div>
+			</div>
+			<div class="card card-body" id="step3">
+				<div class="stepLine">
+					<p class="alignleft h5">Setting up A DarkSky Account</p> 
+					<button class="btn btn-primary btn-sm alignbtn" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="true" aria-controls="multiCollapseExample3">Expand</button>
+				</div>
+				<div class="collapse show" id="multiCollapseExample3" style="">
+					<br>
+					<p>In order to access DarkSky's weather inforamtion, you'll need to create a free account.  As a note, the free account only allows you to make 1,000 API calls per day.  This is more than enough for today's lab, but be aware if you decide to work with DarkSky or other API's on your group project. Most API's will have similiar restrictions.  If your code makes a lot of automated API requests (say in a for/while loop) you may quickly run out of API requests while testing your app!</p>
+					<dl>
+						<dt>1. Register at DarkSky.net</dt>
+						<dd>
+							<div class="row">
+								<div class="col-6">
+									<img src="./Lab 7_files/register.png" alt="The registration page for DarkSky" class="img-fluid">
+								</div>
+								<div class="col-6">
+									Head over to the registration page and enter in your email &amp; password information to register for a new account.
+								</div>
+							</div>
+						</dd>
+						<br>
+						<dt>2. Login and Find Your API Access Key</dt>
+						<dd>
+							<div class="row">
+								<div class="col-6">
+									<img src="./Lab 7_files/account_page.png" alt="The registration page for DarkSky" class="img-fluid">
+								</div>
+								<div class="col-6">
+									After you login, you'll find your API access key (Please note the one in the image is invalid/old.  Don't use it! It won't work!).  Make sure to either keep this tab open or save your "Sample API Call" URL.  We'll be using it later on in our weather.html's javascript code.
+								</div>
+							</div>
+						</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="card card-body" id="step4">
+				<div class="stepLine">
+					<p class="alignleft h5">Handling API Requests</p> 
+					<button class="btn btn-primary btn-sm alignbtn" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="true" aria-controls="multiCollapseExample4">Expand</button>
+				</div>
+				<div class="collapse show" id="multiCollapseExample4" style="">
+					<p>In this section, we'll cover how your javascript code will actually make a request to the DarkSky Api</p>
+					<hr>
+					<dl>
+						<dt>Make an API Request with Ajax and Jquery</dt>
+						<dd>
+							<div class="code-toolbar"><pre class="row language-js"><code class=" language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> url <span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span> <span class="token comment">//Place your DarkSky API Call Here </span>
+	$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span>url<span class="token punctuation">,</span> dataType<span class="token punctuation">:</span><span class="token string">"jsonp"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></div>
+							<dl class="row">
+								<dt class="col-sm-2">var url = ''</dt>
+								<dd class="col-sm-10">Inside of the single quotes '', you'll need to add the API URL you saved from DarkSky.  This is listed in the "Sample API Call" as https://api.darksky.net/forecast/[key]/[latitude],[longitude]</dd>
+								<dt class="col-sm-2">$.ajax({...</dt>
+								<dd class="col-sm-10">To access DarkSky's data, we'll use ajax to make a call to our url for json information.  The key part here is that our call will return a json object called data.  The data object will include the current weather and future weather information listed by the hour or day.  Checkout a sample response <a href="https://darksky.net/dev/docs#forecast-request">here</a></dd>
+							</dl>
+						</dd>
+						<dt>2. Display Your Weather Data</dt>
+						<dd>
+							<div class="code-toolbar"><pre class="row language-js"><code class=" language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> url <span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span> <span class="token comment">//Place your DarkSky API Call Here </span>
+	$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span>url<span class="token punctuation">,</span> dataType<span class="token punctuation">:</span><span class="token string">"jsonp"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Review all of the data returned</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Current Temp: "</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>currently<span class="token punctuation">.</span>apparentTemperature<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//View Today's Temp</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Tomorrow's High: "</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>daily<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>apparentTemperatureHigh<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//View Tomorrow's High</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></div>
+							<dl class="row">
+								<dt class="col-sm-4">console.log(data);</dt>
+								<dd class="col-sm-8">To review all of the data provided by DarkSky, we'll print it out to the console.  Open your Web Browser and you can see all of the fields loaded into our JSON data.  The fields we want are "currently" (i.e., the current weather) and "daily" (i.e., an 8 day forecast of weather information).</dd>
+								<dt class="col-sm-4">data.currently.apparentTemperature</dt>
+								<dd class="col-sm-8">To access the current weather information, we'll need to use the following format: data.currently.FIELD_NAME.  In this example, we are retrieving the current temperature.</dd>
+								<dt class="col-sm-4">data.daily.data[1].apparentTemperatureHigh</dt>
+								<dd class="col-sm-8">To access future weather information, we'll need to access the daily field's data array.  The data array contains 8 days of information (starting with today's information).  In the example, we are grabbing the estimated high temperature for tomorrow which means we'll need to use index [1] (index 0 is the current day's information).</dd>
+								<dt class="col-sm-4">Complete List of Data Point Fields</dt>
+								<dd class="col-sm-8">DarkSky provides far more information than what we'll need for today's lab.  To see all of the types of information you can retrieve, checkout the documentation's complete list of data fields <a href="https://darksky.net/dev/docs#data-point-object">here</a></dd>
+							</dl>
+						</dd>
+						<dt>3. Working with Unix Timestamps</dt>
+						<dd>
+							<div class="code-toolbar"><pre class="row language-js"><code class=" language-js"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">ready</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">var</span> url <span class="token operator">=</span><span class="token string">''</span><span class="token punctuation">;</span> <span class="token comment">//Place your DarkSky API Call Here </span>
+	$<span class="token punctuation">.</span><span class="token function">ajax</span><span class="token punctuation">(</span><span class="token punctuation">{</span>url<span class="token punctuation">:</span>url<span class="token punctuation">,</span> dataType<span class="token punctuation">:</span><span class="token string">"jsonp"</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">data</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> 
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Review all of the data returned</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Current Temp: "</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>currently<span class="token punctuation">.</span>apparentTemperature<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//View Today's Temp</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Tomorrow's High: "</span> <span class="token operator">+</span> data<span class="token punctuation">.</span>daily<span class="token punctuation">.</span>data<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>apparentTemperatureHigh<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//View Tomorrow's High</span>
+		<span class="token keyword">var</span> unix_time <span class="token operator">=</span> data<span class="token punctuation">.</span>currently<span class="token punctuation">.</span>time<span class="token punctuation">;</span><span class="token comment">//Retrieve the current timestamp</span>
+		<span class="token keyword">var</span> javascript_time <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span>unix_time <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//Convert the unix time stamp to javascript</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>javascript_time<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>javascript_time<span class="token punctuation">.</span><span class="token function">getDay</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span></code></pre><div class="toolbar"><div class="toolbar-item"><a>Copy</a></div></div></div>
+							<dl class="row">
+								<dt class="col-sm-4">unix_time * 1000</dt>
+								<dd class="col-sm-8">DarkSky provides the timestamps for each weather forecast datapoint, but we can't use this information as-is.  This is because DarkSky returns a Unix timestamp (in seconds) but in javascript our Date class works in milliseconds!  So to convert the Unix timestamp, we need to multiply it by 1,000.</dd>
+								<dt class="col-sm-4">console.log(javascript_time);</dt>
+								<dd class="col-sm-8">The complete timestamp will list the provided date and time. </dd>
+								<dt class="col-sm-4">javascript_time.getDay()</dt>
+								<dd class="col-sm-8">If we want to pull out individual parts of our timestamp, we'll need to use the various get() methods provided by the Date class.  In this example, we are using the .getDay() method which returns the day of the week.  As you can see, the value returned is a number between 0 &amp; 6, where 0 represents Sunday and 6 represents Saturday.</dd>
+								<dt class="col-sm-4">Complete List of Date Methods</dt>
+								<dd class="col-sm-8">If you want to learn more about working with Javascript Dates, check out W3Schools tutorial <a href="https://www.w3schools.com/jsref/jsref_obj_date.asp">here</a></dd>
+							</dl>
+						</dd>
+					</dl>
+					
+				</div>
+			</div>
+			
+			<div class="card card-body" id="step5">
+				<div class="stepLine">
+					<p class="alignleft h5">What To Do</p> 
+					<button class="btn btn-primary btn-sm alignbtn" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="true" aria-controls="multiCollapseExample5">Expand</button>
+				</div>
+				<div class="collapse show" id="multiCollapseExample5" style="">
+						<dl>
+							<dt></dt>
+							<dd>
+								Edit weather.html to make it look like the example at the top of the page (in the section Lab Overview). Submit your weather.html file to Canvas.  If you worked with a partner, make sure to list them in an html comment at the top of your webpage!
+							</dd>
+						</dl>
+				</div>
+			</div>
+			
+			<div class="card card-body" id="step6">
+				<div class="stepLine">
+					<p class="alignleft h5">Rubric</p> 
+					<button class="btn btn-primary btn-sm alignbtn" type="button" data-toggle="collapse" data-target="#multiCollapseExample6" aria-expanded="false" aria-controls="multiCollapseExample6">Expand</button>
+				</div>
+				<div class="collapse" id="multiCollapseExample6">
+					<table class="table table-hover">
+						<thead>
+							<tr><th>Lab Component</th><th>Points Worth: 20</th>
+						</tr></thead>
+						<tbody>
+							<tr><td>image_today</td><td>2</td></tr>
+							<tr><td>icon_today</td><td>2</td></tr>
+							<tr><td>temp_today</td><td>2</td></tr>
+							<tr><td>thermometer_inner</td><td>2</td></tr>
+							<tr><td>precip_today</td><td>2</td></tr>
+							<tr><td>humidity_today</td><td>2</td></tr>
+							<tr><td>wind_today</td><td>2</td></tr>
+							<tr><td>summary_today</td><td>2</td></tr>
+							<tr><td>Displays Icon For Each Day In 6 Day Forecast</td><td>2</td></tr>
+							<tr><td>Displays High For Each Day In 6 Day Forecast</td><td>1</td></tr>
+							<tr><td>Displays Low For Each Day In 6 Day Forecast</td><td>1</td></tr>
+						</tbody>
+					</table>
+				</div>
+			</div> 
+		</main><!-- /.container -->
+		<div id="bottom_nav">
+			<div class="row">
+				<div class="col-10">
+				</div>
+				<div class="col-2">
+				    <div class="row">
+				        <div class="col-2">
+				            
+				        </div>
+				        <div class="col-10">
+        					<div class="card">	  
+        					  <div class="card-body">
+        					  	<p class="h4 text-center">Helper Icons</p>
+        					  	<hr>
+        					  	<div class="row">
+        					  	    <div class="col-4">
+        					  	        <img src="./Lab 7_files/alert.svg" alt="Octicon alert icon" style="padding-right:15px" height="30px">
+        					  	    </div>
+        					  	    <div class="col-8">Common Errors</div>
+        					  	</div>
+        					  	<div class="row">
+        					  	    <div class="col-4">
+        					  	        <img src="./Lab 7_files/info.svg" alt="Octicon info icon" style="padding-right:15px" height="30px">
+        					  	    </div>
+        					  	    <div class="col-8">More Information</div>
+        					  	</div>
+        					  </div>
+        					</div>
+        					<button class="btn btn-primary btn-block alignright expandAll" type="button">Expand All</button>
+        					<button class="btn btn-primary btn-block alignright collapseAll" type="button">Collapse All</button>
+        				</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+
+</body></html>

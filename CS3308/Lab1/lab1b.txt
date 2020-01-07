@@ -1,0 +1,10 @@
+Ryan Hoffman(me) & Zach
+For step 1 & 2 there were no commands used.
+For step 3, I used the command: 'unzip Lab1b.zip'.
+For step 4 I used the command: 'cd Lab1b' to change directory and then 'wc -l password_demo.txt' to 
+get a line count of 18. To get the number of characters I used the command: 'wc -m password_demo.txt' and got 670.
+Using the command: 'cut -d: -f1 password_demo.txt' I was able to print the first column of password_demo.txt (usernames).
+To print out only LN and HW1, I used the command: 'cut -d" " -f2,3 grades.txt'.
+Usingthe command: 'cut -f4 -d: password_demo.txt | sort | uniq >user_groups.txt' I was able to print out the user groups and pipe
+the output to a file called user_groups.txt.
+Using command: 'cut -f1 -d: password_demo.txt | grep ^[mws]' I was able to display only usernames starting with m, w, or s.

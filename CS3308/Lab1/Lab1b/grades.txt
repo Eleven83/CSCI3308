@@ -1,0 +1,7 @@
+FN LN HW1 HW2 HW3 L1 L2 L3
+Bob Smith 90 93 86 81 92 100
+Sally Mae 75 67 78 95 91 64
+John Doe 99 100 67 86 77 94
+Julia Tee 0 80 71 98 71 50
+Edward Rally 99 100 88 89 91
+Randy Rando 74 67 90 83 85 100

@@ -1,0 +1,27 @@
+Ryan Hoffman(me), Zach, & Alec
+Command to make a directory named cs3308: 'mkdir cs3308'
+Command to rename directory: 'mv cs3308 CSCI3308' and Command to enter the directory: 'cd CSCI3308'.
+Command to display all contents in Lab1a directory: 'ls -a'. This shows hidden files.
+Command to change to pictures directory: 'cd pictures'. 
+Command to list the files in the pictures directory, sorted according to their size, listing one file per
+line: 'ls -lS'. This also shows the largest file is bison.jpg.
+Command to create a new directory called bigData: 'mkdir bigData'.
+Command to find the largest file in the texts directory: 'ls -lS -r' which shows tobuildafire.txt is largest.
+Command to copy both the largest file from the pictures directory and the largest file from the 
+texts directory into it: 'cp pictures/bison.jpg bigData' and 'cp texts/tobuildafire.txt bigData'.
+Command to display the size of the bigData directory: 'du -k' to show that the size is 700 kb.
+Command to create a zip file called bigData.zip containing all the files in bigData: 'zip -r bigData.zip bigData'.
+Command to display the size of bigData.zip: 'du -k bigData.zip'. The size is 660 kb.
+Command to create a tar file called bigData.tar containing all the files in bigData: 'tar -cvf bigData.tar bigData'.
+Command to display the size of bigData.tar: 'du -k bigData.tar'. The size is 700 kb.
+Command to delete bigData and bigData.zip: 'rm -r bigData' and 'rm -r bigData.zip'.
+Command to extract the contents in the tar file “bigData.tar”: 'tar -xvf bigData.tar'.
+The difference between “little1.html” and “little2.html” is that little1.html has a title. This is found using
+the command: 'diff -h little1.html littl2.html'
+Used command: 'find . -name target.txt' to find the file called “target.txt”. The path from the Lab1a
+directory is /texts/poems/supersecrets/lib/extra/target.txt. Its full path on my machine is: /c/Users/ryhof/Desktop/CSCI/CSCI3308/Lab1a/texts/poems/supersecrets/lib/extra/target.txt
+which was obtaind using the command: ' find $(pwd) -name target.txt
+Command to get first 5 lines of a text: 'head -5 ./texts/thecactus.txt' and the last 5 lines
+of a different text: 'tail -5 ./texts/theclevercrab.txt.
+
+-----END Lab1a Part 1-----------
